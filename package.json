@@ -1,0 +1,22 @@
+{
+  "name": "weapon-bot",
+  "version": "1.0.0",
+  "description": "Bot for Discord",
+  "author": "Jhonattan Loli Mazzuco",
+  "license": "MIT",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "register": "node src/utils/registerCommands.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.0.3",
+    "puppeteer": "^22.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

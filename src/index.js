@@ -1,6 +1,7 @@
 import 'dotenv/config';
-import { Client, EmbedBuilder, Events, GatewayIntentBits, ActivityType } from 'discord.js';
+import { ActivityType, Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
 import getXboxMostPlayedRanking from './functions/getXboxMostPlayedRanking.js';
+import { SENUA_MESSAGE } from './constants/senua-message.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -36,6 +37,9 @@ client.on('interactionCreate', async interaction => {
 
           await interaction.editReply({ embeds: [embed], ephemeral: true });
         });
+      break;
+    case 'senua':
+      await interaction.reply(SENUA_MESSAGE);
       break;
     default:
       await interaction.reply('Comando não encontrado!');

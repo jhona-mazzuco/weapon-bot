@@ -10,6 +10,10 @@ const registerCommands = [
     name: 'xbox-most-played',
     description: 'Show the most played games of Xbox',
   },
+  {
+    name: 'senua',
+    description: 'Senua description',
+  },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);

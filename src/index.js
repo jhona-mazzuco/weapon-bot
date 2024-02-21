@@ -1,11 +1,20 @@
 import 'dotenv/config';
-import { Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
+import { Client, EmbedBuilder, Events, GatewayIntentBits, ActivityType } from 'discord.js';
 import getXboxMostPlayedRanking from './functions/getXboxMostPlayedRanking.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once(Events.ClientReady, readyClient => {
   console.log(`Ready! Logged in as ${ readyClient.user.tag }`);
+  readyClient.user.setPresence({
+    status: 'online',
+    activities: [
+      {
+        name: 'Weapon Bot',
+        type: ActivityType.Playing,
+      }
+    ]
+  });
 });
 
 client.on('interactionCreate', async interaction => {

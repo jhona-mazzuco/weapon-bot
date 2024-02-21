@@ -1,25 +1,19 @@
-import puppeteer from 'puppeteer';
+import { load } from 'cheerio';
 
 async function getXboxMostPlayedRanking() {
-  const browser = await puppeteer.launch();
-  const [page] = await browser.pages();
+  const html = await fetch(`https://www.microsoft.com/en-us/store/most-played/apps/xbox`)
+    .then(response => response.text());
 
-  await page.goto(`https://www.microsoft.com/en-us/store/most-played/apps/xbox`);
+  const $ = await load(html);
 
-  const ranking = await page.evaluate(() => {
-    const items = [];
-    const elements = document.querySelectorAll('h3.base > a');
-    for (let [idx, el] of elements.entries()) {
-      const row = `${ ++idx } - ${ el.textContent }`;
-      items.push(row);
-    }
+  const listItems = $('h3.base > a');
 
-    return items;
+  const ranking = listItems.map((idx, item) => {
+    const [el] = item.children;
+    return `${ ++idx } -  ${ el.data }`;
   });
 
-  await browser.close();
-
-  return ranking.join('\n');
+  return [...ranking].join('\n');
 }
 
 export default getXboxMostPlayedRanking;

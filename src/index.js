@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { ActivityType, Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
 import getXboxMostPlayedRanking from './functions/getXboxMostPlayedRanking.js';
-import { SENUA_MESSAGE } from './constants/senua-message.js';
+import SENUA_MESSAGE from './constants/senua-message.js';
 import getPlaystationMostPlayedRanking from './functions/getPlaystationMostPlayedRanking.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });

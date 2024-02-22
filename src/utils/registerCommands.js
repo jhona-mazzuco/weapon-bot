@@ -9,6 +9,10 @@ const registerCommands = [
   {
     name: 'xbox-most-played',
     description: 'Show the most played games of Xbox',
+  },,
+  {
+    name: 'playstation-most-played',
+    description: 'Show the most played games of Playstation',
   },
   {
     name: 'senua',

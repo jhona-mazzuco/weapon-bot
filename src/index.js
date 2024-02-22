@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { ActivityType, Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
 import getXboxMostPlayedRanking from './functions/getXboxMostPlayedRanking.js';
 import { SENUA_MESSAGE } from './constants/senua-message.js';
+import getPlaystationMostPlayedRanking from './functions/getPlaystationMostPlayedRanking.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -27,13 +28,27 @@ client.on('interactionCreate', async interaction => {
     case 'xbox-most-played':
       await interaction.deferReply();
 
-      const ranking = await getXboxMostPlayedRanking();
+      const xboxRanking = await getXboxMostPlayedRanking();
 
       interaction.fetchReply()
         .then(async () => {
           const embed = new EmbedBuilder()
-            .setTitle('Mais jogados Xbox')
-            .setDescription(ranking);
+            .setTitle('Mais jogados do Xbox')
+            .setDescription(xboxRanking);
+
+          await interaction.editReply({ embeds: [embed], ephemeral: true });
+        });
+      break;
+    case 'playstation-most-played':
+      await interaction.deferReply();
+
+      const psRanking = await getPlaystationMostPlayedRanking();
+
+      interaction.fetchReply()
+        .then(async () => {
+          const embed = new EmbedBuilder()
+            .setTitle('Mais jogados do Playstation')
+            .setDescription(psRanking);
 
           await interaction.editReply({ embeds: [embed], ephemeral: true });
         });
